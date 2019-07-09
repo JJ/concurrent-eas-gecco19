@@ -25,9 +25,81 @@
   </head>
   <body>
     <div class="reveal">
+      <div class='footer'>URL: <code>goo.gl/zMsfVd</code>
+	<a rel="license"
+	   href="http://creativecommons.org/licenses/by-sa/4.0/">
+	  <img alt="Licencia de Creative Commons" style="border-width:0"
+	       src="https://i.creativecommons.org/l/by-sa/4.0/88x31.png"/>
+	</a><br />This work is under a <a rel="license"
+					  href="http://creativecommons.org/licenses/by-sa/4.0/">CC-BY-SA 4.0 license</a>.
+      </div>
+
       <div class="slides">
 	<section><h1>Concurrency in evolutionary algorithms</h1><h2><code>@jjmerelo</code></h2>
 	</section>
+
+
+
+		      <!-- Reactive programming -->
+
+	      <section>
+		<section>
+		  <h1>It's not programming as usual</h1>
+		</section>
+
+		<section>
+		  <h1><strong>Reactive</strong> programming</h1>
+
+		  <aside class='notes'>It's all about <a
+		    href='https://en.wikipedia.org/wiki/Reactive_programming'>data
+		    flows</a> and taking care of them. </aside>
+		</section>
+		
+		<section>
+		  <h1>Algorithm + stream = application in the cloud</h1>
+		</section>
+
+		<section>
+		  <h1>Decoupled processing and data structures</h1>
+		</section>
+
+		<section>
+		  <h1>Before</h1>
+		  <pre><code class='javascript'>do {
+    eo.generation();
+} while ( eo.fitness_of[eo.population[0]] < chromosome_size ); </pre></code>
+		</section>
+
+		<section>
+		  <h1>Decoupling</h1>
+		  <pre><code class='javascript'>var random_chromosome = function() {
+    return utils.random( chromosome_size );
+};
+var population = new Population();
+population.initialize( population_size, random_chromosome); </code></pre>
+
+		  <pre class='fragment'><code class='javascript'>var eo = new fluxeo( this_fitness,
+		     new Tournament( tournament_size,
+		        population_size-2 ),
+                     check);</code></pre>
+		</section>
+
+		<section>
+		  <h1>Algorithm <strong>on</strong> population</h1>
+		  <pre class='fragment'><code class='javascript'>eo.algorithm( population, function ( population ) {
+    logger.info( {
+	end: { time: process.hrtime(),
+	    generation: total_generations,
+	    best : { chromosome : population.best,
+		fitness : population.fitness(population.best)  }
+	}
+    });
+});</code></pre>
+		</section>
+		
+		
+	      </section>
+	      <!-- End reactive programming -->
 	
       </div>
     </div>
