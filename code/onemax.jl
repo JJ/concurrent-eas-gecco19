@@ -1,5 +1,7 @@
 #!/usr/bin/env julia
 
+using Distributed
+
 push!(LOAD_PATH, pwd() )
 
 global iterations = 100000
@@ -25,8 +27,10 @@ function time_mutations(number,length)
   inicioTiempo = time()
 
   for i in 0:1:number
-    indi =  random_chromosome(length)
-    ones = reduce(+,indi) 
+      indi = random_chromosome(length)
+      ones = @distributed (+) for i in indi
+          i
+      end
   end
   time()-inicioTiempo
 
@@ -35,7 +39,7 @@ end
 function run_onemax() 
     length = 16
     while length <= top_length
-        println("julia-Onemax, " * string(length) * ", " * string(time_mutations( iterations,length )))
+        println("julia-Onemax-distributed, " * string(length) * ", " * string(time_mutations( iterations,length )))
         length *= 2
     end
 end
