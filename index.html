@@ -90,7 +90,7 @@
           end
       end
 	    </code></pre>
-	    <aside class='fragment'>This is a Julia fragment. It does not work too well, and in fact it's slower than doing it sequentially. Why? Too little computation, too much communication. What's there is a "reduce" loop that adds up everything in the chromosome, but it's slower than using reduce directly in general, although you might get a slight improvement for big chromosome size with a single processor. If you use several processors there's going to be trouble no matter what. </aside>
+	    <aside class='notes'>This is a Julia fragment. It does not work too well, and in fact it's slower than doing it sequentially. Why? Too little computation, too much communication. What's there is a "reduce" loop that adds up everything in the chromosome, but it's slower than using reduce directly in general, although you might get a slight improvement for big chromosome size with a single processor. If you use several processors there's going to be trouble no matter what. </aside>
 	  </section>
 
 	  <section><h2>There's a <strong>right</strong> level of parallelism</h2>
@@ -102,10 +102,24 @@ end
 	    </code></pre>
 	    <aside class='notes'>You need to tell Julia the number of processors you are going to be using.</aside>
 	  </section>
+
+	  <section><h1>Use well-arranged data</h1>
+	    <h2 class='fragment'>Functional rocks</h2>
+	    <aside class='notes'>You may have realized tha tabove we use a list comprehension to deal with the paralellism; @distributed is a macro that applies to loops and might produce a result. We can't work on a loop whose body has a side effect, but on a loop that produces a result.</aside>
+	  </section>
+	  
+	  <section><blockquote>Juan Julián Merelo Guervós, José Mario García Valdez:
+	      Going Stateless in Concurrent Evolutionary Algorithms. WEA (1) 2018: 17-29</blockquote>
+	    <h2 class='fragment'>Initial exploration of autothreading</h2>
+	    <aside class='fragment'>Population level: good; individual-level: bad</aside>
+	  </section>
 	</section>
 	
 
 	<section> <!-- CSP -->
+
+	  <section><h1>There's a <strong>better way to do it</strong></h1></section>
+	  
 	  <section><h1>Sequential processes communicate</h1>
 	    <h1 class='fragment'>Process writes to/read from <strong>channels</strong></h1>
 	  </section>
@@ -421,8 +435,9 @@ await $more-work;
     <aside class='notes'>Which has always been Perl's motto, so no surprise here. You can mix and match many different ways to deal with the processes, what everyone does, and if it's reactive or not.</aside>
   </section>
 
-  <section><h1>Start with functional equivalence</h1>
+  <section><h1>Start (carefully) with functional equivalence</h1>
     <h2 class='notes'>Add communication</h2>
+    <aside class='notes'>You can try and use autothreading if you find something that can be automatically parallelized</aside>
   </section>
 
   <section>
