@@ -90,7 +90,7 @@
           end
       end
 	    </code></pre>
-	    <aside class='fragment'>This is a Julia fragment. It does not work too well, and in fact it's slower than doing it sequentially. Why? Too little computation, too much communication. What's there is a "reduce" loop that adds up everything in the chromosome, but it's slower than using reduce directly in general, although you might get a slight improvement for big chromosome size </aside>
+	    <aside class='fragment'>This is a Julia fragment. It does not work too well, and in fact it's slower than doing it sequentially. Why? Too little computation, too much communication. What's there is a "reduce" loop that adds up everything in the chromosome, but it's slower than using reduce directly in general, although you might get a slight improvement for big chromosome size with a single processor. If you use several processors there's going to be trouble no matter what. </aside>
 	  </section>
 
 	  <section><h2>There's a <strong>right</strong> level of parallelism</h2>
@@ -101,6 +101,7 @@ end
 # Run with julia -p 4 code/parallel-evaluation.jl
 	    </code></pre>
 	    <aside class='notes'>You need to tell Julia the number of processors you are going to be using.</aside>
+	  </section>
 	</section>
 	
 
