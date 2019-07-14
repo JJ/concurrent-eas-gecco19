@@ -121,7 +121,7 @@ toolbox.register("map", futures.map)
 	    <h1>Learn map/reduce</h1>
 	    <pre><code>say [+] Bool.pick xx 65536 ==> map( *.so ); </code></pre>
 	    <pre class='fragment'><code>say (Bool.pick xx 65536).rotor(4).map( ! (0 &lt; *.sum &lt; 4) ).sum;</code></pre> 
-	    <aside class='fragment'>This is Perl6, which is an amazing language, which we have already mentioned in the context of concurrent languages. It generally goes with functional languages (but not always), but in this case it is like that. Also reactive, as you can see from the chaining of different functions. We are using the "feed" or "rocket" operator in the first case, which is cool, and a reduce operator, which is simply [] around something.</aside>
+	    <aside class='notes'>This is Perl6, which is an amazing language, which we have already mentioned in the context of concurrent languages. It generally goes with functional languages (but not always), but in this case it is like that. Also reactive, as you can see from the chaining of different functions. We are using the "feed" or "rocket" operator in the first case, which is cool, and a reduce operator, which is simply [] around something.</aside>
 	  </section>
 	  
 	  <section><blockquote>Juan Julián Merelo Guervós, José Mario García Valdez:
@@ -160,7 +160,7 @@ toolbox.register("map", futures.map)
 	  </section>
 
 	  <section data-background='https://farm4.staticflickr.com/3241/2462969567_67d38344a4_b_d.jpg'>
-	    <h1><strong>Split</strong> code from data</h1>
+	    <h1><strong>Separates</strong> code from data</h1>
 	    <h2 class='fragment'><strong>Decouples</strong> state and computation</h2>
 	  </section>
 
@@ -300,7 +300,8 @@ toolbox.register("map", futures.map)
   chosen</aside>
 </section>
 
-<section><h1>Repeat until solution is <strong>found</strong></h1>
+<section data-background='https://live.staticflickr.com/5319/6943508644_202fbcbf7a_o_d.jpg'>
+  <h1>Repeat until solution is <strong>found</strong></h1>
   <aside class='notes'>Or until you get tired, whatever happens
     first.</aside>
 </section>
@@ -458,6 +459,7 @@ end
     <blockquote>Juan Julián Merelo Guervós, Juan Luis Jiménez Laredo, Pedro A. Castillo, José Mario García Valdez, Sergio Rojas Galeano:
       Exploring Concurrent and Stateless Evolutionary Algorithms. EvoApplications 2019: 405-412</blockquote>
   </section>
+  
   <section><h1>Open source!</h1>
     <h2 class='fragment'>Of course</h2>
     <h1 class='fragment'><code><a href='https://github.com/JJ/p6-algorithm-evolutionary-simple'>git.io/p6-ea</a></code></h1>
