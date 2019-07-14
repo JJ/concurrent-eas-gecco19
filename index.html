@@ -80,13 +80,27 @@
 	  </section>
 
 	  <section><h1>Autothreading</h1>
-	    <pre><code>indi = random_chromosome(length)
-ones = @distributed (+) for i in indi
-    i
-end
+	    <pre><code>      indi = random_chromosome(len)
+      rr = @distributed (+) for j in [indi[n:n+3] for n=1:3:length(indi)-3]
+          value = reduce(+, j )
+          if value == 0 || value == 4
+              1
+          else
+              0
+          end
+      end
 	    </code></pre>
-	    <aside class='fragment'>This is a Julia fragment. It does not work too well, and in fact it's slower than doing it sequentially. Why? Too little computation, too much communication. What's there is a "reduce" loop that adds up everything in the chromosome, but it's slower than using reduce directly. </aside>
-	    
+	    <aside class='fragment'>This is a Julia fragment. It does not work too well, and in fact it's slower than doing it sequentially. Why? Too little computation, too much communication. What's there is a "reduce" loop that adds up everything in the chromosome, but it's slower than using reduce directly in general, although you might get a slight improvement for big chromosome size </aside>
+	  </section>
+
+	  <section><h2>There's a <strong>right</strong> level of parallelism</h2>
+	    <pre><code>fitness = @distributed for i in 0:1:number
+     indi = random_chromosome(length)
+     reduce( +, indi)
+end
+# Run with julia -p 4 code/parallel-evaluation.jl
+	    </code></pre>
+	    <aside class='notes'>You need to tell Julia the number of processors you are going to be using.</aside>
 	</section>
 	
 

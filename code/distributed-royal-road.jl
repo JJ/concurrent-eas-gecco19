@@ -44,7 +44,7 @@ end
 function run_royalroad()
     len = 16
     while len <= top_length
-        println("julia-RoyalRoad, " * string(len) * ", " * string(time_mutations( iterations,len )))
+        println("julia-RoyalRoad-d4, " * string(len) * ", " * string(time_mutations( iterations,len )))
         len *= 2
     end
 end

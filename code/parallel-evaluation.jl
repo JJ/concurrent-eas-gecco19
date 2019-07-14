@@ -24,13 +24,14 @@ end
 
 # Mutate and compute time
 function time_mutations(number,length)
-  inicioTiempo = time()
+    inicioTiempo = time()
 
-  @distributed for i in 0:1:number
-      indi = random_chromosome(length)
-      ones =  reduce( +, indi)
-  end
-  time()-inicioTiempo
+    fitness = @distributed for i in 0:1:number
+        indi = random_chromosome(length)
+        reduce( +, indi)
+    end
+    println(fitness)
+    time()-inicioTiempo
 
 end
 
