@@ -365,6 +365,21 @@ $c.send(1) for ^2;</code></pre>
 await $more-work; 
 	    </code></pre>
 	    <aside class='notes'>We have essentially two channels here, one that holds the items to be added, another that is used for output. But all threads (started with <code>start</code> read from one channel, write to the other</aside></section>
+
+	  <section><h1>Channels in Julia</h1>
+	    <pre><code>n = 32
+c1 = Channel(n)
+for _ in 1:n
+    put!(c1,"foo")
+end
+for _ in 1:n # Reads from channel
+    data = take!(c1)
+    println(data)
+end
+	    </code></pre>
+	    <aside class='notes'>Concepts are similar, obviously syntax will vary.</aside>
+	  </section>
+	  
 	</section>
 
 <!-- Implementing a concurrent evolutionary algorithm in Perl 6 -->
