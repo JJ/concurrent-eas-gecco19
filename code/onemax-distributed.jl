@@ -28,7 +28,9 @@ function time_mutations(number,length)
 
   for i in 0:1:number
       indi = random_chromosome(length)
-      ones = reduce( +, indi )
+      ones = @distributed (+) for i in indi
+          i
+      end
   end
   time()-inicioTiempo
 

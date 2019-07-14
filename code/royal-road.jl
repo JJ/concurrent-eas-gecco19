@@ -23,23 +23,29 @@ function random_chromosome(length)
 end
 
 # Mutate and compute time
-function time_mutations(number,length)
+function time_mutations(number,len)
   inicioTiempo = time()
 
   for i in 0:1:number
-      indi = random_chromosome(length)
-      ones = reduce( +, indi )
+      indi = random_chromosome(len)
+      rr = 0
+      for j in [indi[n:n+3] for n=1:3:length(indi)-3]
+          value = reduce(+, j )
+          if value == 0 || value == 4
+              rr+=1
+          end
+      end
   end
   time()-inicioTiempo
 
 end
 
-function run_onemax() 
-    length = 16
-    while length <= top_length
-        println("julia-Onemax-distributed, " * string(length) * ", " * string(time_mutations( iterations,length )))
-        length *= 2
+function run_royalroad()
+    len = 16
+    while len <= top_length
+        println("julia-RoyalRoad, " * string(len) * ", " * string(time_mutations( iterations,len )))
+        len *= 2
     end
 end
 
-run_onemax()
+run_royalroad()
